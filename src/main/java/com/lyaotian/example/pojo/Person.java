@@ -34,7 +34,7 @@ public class Person {
         this.birthday = birthday;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
