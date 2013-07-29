@@ -1,5 +1,6 @@
 import com.lyaotian.example.pojo.Email;
 import com.lyaotian.example.pojo.Person;
+import com.lyaotian.example.repository.EmailRepository;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -8,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.Set;
 
@@ -29,6 +30,9 @@ import static org.junit.Assert.assertTrue;
 public class ORMTest {
     @Autowired
     EntityManagerFactory entityManagerFactory;
+    @Autowired
+    EmailRepository emailRepository;
+
     EntityManager entityManager;
 
     @Before
@@ -51,8 +55,8 @@ public class ORMTest {
     public void testAddEmail(){
         Email email1 = new Email("lyaotian@live.com");
         Email email2 = new Email("lyaotian@gmail.com");
-        entityManager.persist(email1);
-        entityManager.persist(email2);
+        emailRepository.save(email1);
+        emailRepository.save(email2);
     }
 
     @Test

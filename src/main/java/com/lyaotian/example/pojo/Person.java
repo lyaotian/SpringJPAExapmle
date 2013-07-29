@@ -19,6 +19,9 @@ public class Person {
     private String lastName;
     private boolean isFemale;
     @Temporal(TemporalType.TIMESTAMP)
+    @Version
+    private Date updateTime;
+    @Temporal(TemporalType.DATE)
     private Date birthday;
     @ManyToMany
     private Set<Email> emails = new HashSet<Email>();
