@@ -15,8 +15,6 @@ public class Email {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private long id;
     private String email;
-    @ManyToMany(mappedBy = "emails")
-    private Set<Person> persons = new HashSet<Person>();
 
     public Email(){
 
@@ -60,13 +58,5 @@ public class Email {
         int result = (int) (id ^ (id >>> 32));
         result = 31 * result + email.hashCode();
         return result;
-    }
-
-    public Set<Person> getPersons() {
-        return persons;
-    }
-
-    public void setPersons(Set<Person> persons) {
-        this.persons = persons;
     }
 }

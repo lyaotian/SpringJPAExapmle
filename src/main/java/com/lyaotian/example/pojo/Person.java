@@ -3,6 +3,7 @@ package com.lyaotian.example.pojo;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
@@ -14,17 +15,20 @@ import java.util.Set;
 public class Person {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long id;
+    private long id;
     private String firstName;
     private String lastName;
     private boolean isFemale;
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     @Version
-    private Date updateTime;
+    private Date updateTime = new Date();
     @Temporal(TemporalType.DATE)
     private Date birthday;
-    @ManyToMany
-    private Set<Email> emails = new HashSet<Email>();
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OrderBy("id ASC")
+    private Set<Email> emails = new LinkedHashSet<Email>();
 
     public Person(){
 
@@ -41,7 +45,7 @@ public class Person {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -75,6 +79,14 @@ public class Person {
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 
     public Set<Email> getEmails() {

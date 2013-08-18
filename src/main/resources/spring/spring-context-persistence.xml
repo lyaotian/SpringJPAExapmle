@@ -12,7 +12,7 @@
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
-                <value>classpath*:config/*.properties</value>
+                <value>classpath:config/*.properties</value>
             </list>
         </property>
     </bean>
@@ -30,9 +30,9 @@
         <property name="jpaProperties">
             <props>
                 <prop key="hibernate.dialect">${jdbc.dialect}</prop>
-                <prop key="hibernate.hbm2ddl.auto">update</prop>
-                <prop key="hibernate.show_sql">${jdbc.showsql}</prop>
-                <prop key="hibernate.format_sql">${jdbc.showsql}</prop>
+                <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+                <prop key="hibernate.show_sql">${hibernate.showsql}</prop>
+                <prop key="hibernate.format_sql">${hibernate.showsql}</prop>
                 <prop key="jdbc.batch_size">50</prop>
                 <prop key="hibernate.cache.use_query_cache">fasle</prop>
             </props>
